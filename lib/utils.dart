@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:sample_chat_app/firebase_options.dart';
 import 'package:sample_chat_app/services/alert_service.dart';
 import 'package:sample_chat_app/services/auth_services.dart';
+import 'package:sample_chat_app/services/media_service.dart';
 import 'package:sample_chat_app/services/navigation_service.dart';
 
 Future<void> setupFirebase() async {
@@ -28,4 +29,5 @@ Future<void> registerServices() async {
   getIt.registerSingleton<AuthService>(AuthService());
   getIt.registerSingleton<NavigationService>(NavigationService());
   getIt.registerSingleton<AlertService>(AlertService());
+  getIt.registerSingleton<MediaService>(MediaService());
 }

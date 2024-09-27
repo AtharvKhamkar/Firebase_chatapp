@@ -150,15 +150,20 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _createAnAccount() {
-    return const Row(
+    return Row(
       mainAxisSize: MainAxisSize.max,
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text('Dont have an account?'),
-        Text(
-          'Sign Up',
-          style: TextStyle(fontWeight: FontWeight.w800),
+        const Text('Dont have an account?'),
+        GestureDetector(
+          onTap: () {
+            _navigationService.pushNamed('/register');
+          },
+          child: const Text(
+            'Sign Up',
+            style: TextStyle(fontWeight: FontWeight.w800),
+          ),
         )
       ],
     );

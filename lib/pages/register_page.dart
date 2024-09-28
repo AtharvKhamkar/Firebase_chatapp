@@ -3,9 +3,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:sample_chat_app/consts.dart';
+import 'package:sample_chat_app/models/user_profile.dart';
+import 'package:sample_chat_app/services/alert_service.dart';
 import 'package:sample_chat_app/services/auth_services.dart';
+import 'package:sample_chat_app/services/database_service.dart';
 import 'package:sample_chat_app/services/media_service.dart';
 import 'package:sample_chat_app/services/navigation_service.dart';
+import 'package:sample_chat_app/services/storage_service.dart';
 import 'package:sample_chat_app/widgets/custom_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -21,6 +25,9 @@ class _RegisterPageState extends State<RegisterPage> {
   late MediaService _mediaService;
   late NavigationService _navigationService;
   late AuthService _authService;
+  late StorageService _storageService;
+  late DatabaseService _databaseService;
+  late AlertService _alertService;
 
   final GlobalKey<FormState> _registerFormKey = GlobalKey();
 
@@ -34,6 +41,9 @@ class _RegisterPageState extends State<RegisterPage> {
     _mediaService = _getIt.get<MediaService>();
     _navigationService = _getIt.get<NavigationService>();
     _authService = _getIt.get<AuthService>();
+    _storageService = _getIt.get<StorageService>();
+    _databaseService = _getIt.get<DatabaseService>();
+    _alertService = _getIt.get<AlertService>();
   }
 
   @override
@@ -171,12 +181,32 @@ class _RegisterPageState extends State<RegisterPage> {
               _registerFormKey.currentState?.save();
               bool result = await _authService.signup(email!, password!);
               if (result) {
-                print(result);
+                String? pfpUrl = await _storageService.uploadUserPfp(
+                    file: selectedImage!, uid: _authService.user!.uid);
+                if (pfpUrl != null) {
+                  await _databaseService.createUserProfile(
+                    userProfile: UserProfile(
+                        uid: _authService.user!.uid,
+                        name: name,
+                        pfpURL: pfpUrl),
+                  );
+                  _alertService.showToast(
+                      text: 'You have registered successfully',
+                      icon: Icons.check);
+                  _navigationService.goBack();
+                  _navigationService.pushReplacementNamed('/home');
+                } else {
+                  throw Exception('Unable to upload user profile picture');
+                }
+              } else {
+                throw Exception('Unable to register user');
               }
-              print(result);
             }
           } catch (e) {
             print(e);
+            _alertService.showToast(
+                text: 'Failed to register, Please try again later',
+                icon: Icons.error);
           }
           setState(() {
             _isLoading = false;

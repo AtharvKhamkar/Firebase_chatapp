@@ -9,7 +9,7 @@ class NavigationService {
   final Map<String, Widget Function(BuildContext)> _routes = {
     "/login": (context) => LoginPage(),
     "/home": (context) => HomePage(),
-    "/register":(context) => RegisterPage()
+    "/register": (context) => RegisterPage()
   };
 
   GlobalKey<NavigatorState> get navigatorKey {
@@ -22,6 +22,10 @@ class NavigationService {
 
   NavigationService() {
     _navigatorKey = GlobalKey<NavigatorState>();
+  }
+
+  void push(MaterialPageRoute route) {
+    _navigatorKey.currentState?.push(route);
   }
 
   void pushNamed(String routeName) {

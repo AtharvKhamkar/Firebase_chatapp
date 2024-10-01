@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCYTq8uBFMBBG74q5-UHdaOyrgXFROIIyc',
-    appId: '1:829198517328:android:232b4a9aa50fe13931bd55',
+    appId: '1:829198517328:android:93071e9de91a023331bd55',
     messagingSenderId: '829198517328',
     projectId: 'samplechatapp-43ca0',
     storageBucket: 'samplechatapp-43ca0.appspot.com',
@@ -64,6 +64,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '829198517328',
     projectId: 'samplechatapp-43ca0',
     storageBucket: 'samplechatapp-43ca0.appspot.com',
+    androidClientId:
+        '829198517328-ipqr51knkhl9fqlv0l0bgqqb7e7astp2.apps.googleusercontent.com',
+    iosClientId:
+        '829198517328-9a9ciql3nbk4nv8lrd4l5vo6tgf9kt19.apps.googleusercontent.com',
     iosBundleId: 'com.example.sampleChatApp',
   );
 
@@ -73,6 +77,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '829198517328',
     projectId: 'samplechatapp-43ca0',
     storageBucket: 'samplechatapp-43ca0.appspot.com',
+    androidClientId:
+        '829198517328-ipqr51knkhl9fqlv0l0bgqqb7e7astp2.apps.googleusercontent.com',
+    iosClientId:
+        '829198517328-9a9ciql3nbk4nv8lrd4l5vo6tgf9kt19.apps.googleusercontent.com',
     iosBundleId: 'com.example.sampleChatApp',
   );
 

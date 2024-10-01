@@ -5,6 +5,7 @@ import 'package:sample_chat_app/services/alert_service.dart';
 import 'package:sample_chat_app/services/auth_services.dart';
 import 'package:sample_chat_app/services/navigation_service.dart';
 import 'package:sample_chat_app/widgets/custom_form_field.dart';
+import 'package:sign_in_button/sign_in_button.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -80,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _loginForm() {
     return Container(
-      height: MediaQuery.sizeOf(context).height * 0.4,
+      height: MediaQuery.sizeOf(context).height * 0.5,
       margin: EdgeInsets.symmetric(
         vertical: MediaQuery.sizeOf(context).height * 0.05,
       ),
@@ -113,7 +114,15 @@ class _LoginPageState extends State<LoginPage> {
                   });
                 },
               ),
-              _loginButton()
+              _loginButton(),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              const Text('Or'),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.01,
+              ),
+              _socialSignInSection(),
             ],
           )),
     );
@@ -165,6 +174,15 @@ class _LoginPageState extends State<LoginPage> {
             style: TextStyle(fontWeight: FontWeight.w800),
           ),
         )
+      ],
+    );
+  }
+
+  Widget _socialSignInSection() {
+    return Column(
+      children: [
+        const Text('Sign In with'),
+        SignInButton(Buttons.google, onPressed: _authService.handleGoogleSignIn)
       ],
     );
   }

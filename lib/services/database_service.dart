@@ -43,6 +43,8 @@ class DatabaseService {
         .snapshots() as Stream<QuerySnapshot<UserProfile>>;
   }
 
+  
+
   Future<bool> checkChatExists(String uid1, String uid2) async {
     String chatID = generateChatID(uid1: uid1, uid2: uid2);
     final result = await _chatCollection?.doc(chatID).get();
